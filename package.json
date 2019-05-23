@@ -1,0 +1,27 @@
+{
+  "name": "devconnector",
+  "version": "1.0.0",
+  "description": "Social network for developers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "keywords": [],
+  "author": "John Zero",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "latest",
+    "nodemon": "latest"
+  },
+  "dependencies": {
+    "bcryptjs": "latest",
+    "config": "latest",
+    "express": "latest",
+    "express-validator": "latest",
+    "gravatar": "latest",
+    "jsonwebtoken": "latest",
+    "mongoose": "latest",
+    "request": "latest"
+  }
+}
