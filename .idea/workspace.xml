@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12ee07b2-da41-4d07-a5a3-c33b2b0780e7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/db.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/default.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/User.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/api/posts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/api/profile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/api/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middleware/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api/auth.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,10 +24,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/db.js">
+        <entry file="file://$PROJECT_DIR$/middleware/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+            <state relative-caret-position="675">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/api/auth.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="63" column="19" lean-forward="true" selection-start-line="63" selection-start-column="19" selection-end-line="65" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -42,17 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/api/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/default.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+            <state relative-caret-position="100">
+              <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="11" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -80,7 +73,6 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/default.json" />
-        <option value="$PROJECT_DIR$/routes/api/auth.js" />
         <option value="$PROJECT_DIR$/routes/api/profile.js" />
         <option value="$PROJECT_DIR$/routes/api/posts.js" />
         <option value="$PROJECT_DIR$/models/User.js" />
@@ -90,6 +82,8 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/routes/api/users.js" />
         <option value="$PROJECT_DIR$/config/default.json" />
+        <option value="$PROJECT_DIR$/middleware/auth.js" />
+        <option value="$PROJECT_DIR$/routes/api/auth.js" />
       </list>
     </option>
   </component>
@@ -140,12 +134,7 @@
             <path>
               <item name="devconnector" type="b2602c69:ProjectViewProjectNode" />
               <item name="devconnector" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devconnector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="devconnector" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="middleware" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="devconnector" type="b2602c69:ProjectViewProjectNode" />
@@ -157,10 +146,6 @@
               <item name="devconnector" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="devconnector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -242,11 +227,12 @@
       <workItem from="1558505454212" duration="792000" />
       <workItem from="1558506268319" duration="2857000" />
       <workItem from="1558509148538" duration="12328000" />
+      <workItem from="1558621805317" duration="3080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16172000" />
+    <option name="totallyTimeSpent" value="19252000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -260,7 +246,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1721" height="935" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24909747" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24909747" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -271,12 +257,12 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32876712" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39975095" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.38356164" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32876712" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32876712" />
-      <window_info anchor="bottom" id="Docker" order="8" />
+      <window_info anchor="bottom" id="Docker" order="8" weight="0.32876712" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -361,23 +347,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/config/lib/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="1648" column="13" selection-start-line="1648" selection-start-column="13" selection-end-line="1648" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/express.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-860">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/mongoose/lib/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -388,13 +357,7 @@
     <entry file="file://$PROJECT_DIR$/node_modules/mongoose/index.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101725">
-          <caret line="4069" selection-start-line="4069" selection-end-line="4069" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json" />
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -416,13 +379,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/posts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -437,24 +393,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/default.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config/db.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
-          <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/config/lib/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="830">
+          <caret line="1648" column="13" selection-start-line="1648" selection-start-column="13" selection-end-line="1648" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/express.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/middleware/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/api/users.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+        <state relative-caret-position="100">
+          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="11" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/default.json">
+    <entry file="file://$PROJECT_DIR$/routes/api/auth.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+        <state relative-caret-position="300">
+          <caret line="63" column="19" lean-forward="true" selection-start-line="63" selection-start-column="19" selection-end-line="65" selection-end-column="13" />
         </state>
       </provider>
     </entry>
