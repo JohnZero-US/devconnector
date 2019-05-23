@@ -14,7 +14,9 @@ const app = express();
 connectDB();
 
 //初始化中间件
-app.use(express.json({extended: false}));
+app.use(express.json({
+  extended: false
+}));
 
 app.get('/', (req, res) => res.send('API Running'));
 

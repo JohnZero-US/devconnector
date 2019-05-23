@@ -15,7 +15,9 @@ module.exports = function (req, res, next) {
     //如果不存在JWT
     if (!token) {
         //返回消息
-        return res.status(401).json({msg: 'No token, authorization defined'});
+        return res.status(401).json({
+            msg: 'No token, authorization defined'
+        });
     }
 
     //验证JWT有效性
@@ -27,7 +29,8 @@ module.exports = function (req, res, next) {
         next();
     } catch (e) {
         //验证不通过
-        res.status(401).json({msg: 'Token is not valid'});
+        res.status(401).json({
+            msg: 'Token is not valid'
+        });
     }
 }
-

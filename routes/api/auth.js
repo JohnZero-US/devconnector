@@ -9,7 +9,10 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const User = require('../../models/User');
-const { check, validationResult } = require('express-validator/check');
+const {
+  check,
+  validationResult
+} = require('express-validator/check');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const bcrypt = require('bcryptjs');
@@ -44,19 +47,31 @@ router.post(
     //判断
     if (!errors.isEmpty()) {
       //返回400错误提示
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({
+        errors: errors.array()
+      });
     }
-    const { name, email, password } = req.body;
+    const {
+      name,
+      email,
+      password
+    } = req.body;
     //
     try {
       //从MongoDB中查找用户
-      let user = await User.findOne({ email });
+      let user = await User.findOne({
+        email
+      });
       //
       if (!user) {
         //如果用户不存在
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+          .json({
+            errors: [{
+              msg: 'Invalid Credentials'
+            }]
+          });
       }
 
       //加密后比对密码是否正确
@@ -66,7 +81,11 @@ router.post(
         //如果用户密码不匹配
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+          .json({
+            errors: [{
+              msg: 'Invalid Credentials'
+            }]
+          });
       }
       //
       const playload = {
@@ -78,11 +97,14 @@ router.post(
       //生成jwt 并且返回 jwt字符串
       jwt.sign(
         playload,
-        config.get('jwtSecret'),
-        { expiresIn: 36000 },
+        config.get('jwtSecret'), {
+          expiresIn: 36000
+        },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({
+            token
+          });
         }
       );
     } catch (e) {
