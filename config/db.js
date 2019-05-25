@@ -18,7 +18,9 @@ const connectDB = async () => {
             //启用新的URL解析器
             useNewUrlParser: true,
             //自动创建下标
-            useCreateIndex: true
+            useCreateIndex: true,
+            //查找但不修改
+            userFindAndModify:false
         });
         //
         console.log('MongoDB Connected...');

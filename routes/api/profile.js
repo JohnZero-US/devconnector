@@ -5,8 +5,8 @@
   DateTime: 2019/5/22 15:31
   Description: 
 */
+//加载对象
 const express = require('express');
-
 const {
   check,
   validationResult
@@ -15,12 +15,13 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 
+//获取登陆用户的简历
 //@route    GET api/profile/me
 //@desc     Get current users profile
 //@access   Private
 router.get('/me', auth, async (req, res) => {
   try {
-    /* 根据User的id从数据库中找到该用户的简历 */
+    /* 根据User的id从数据库中找到该用户的简历，并包含用户集合的名字和头像 */
     const profile = await Profile.findOne({
       user: req.user.id
     }).populate('user', ['name', 'avatar']);
@@ -39,6 +40,7 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
+//新增或更新简历
 //@route    POST api/profile
 //@desc     Create or update users profile
 //@access   Private
@@ -51,7 +53,7 @@ router.post(
       check('skills', 'Skills is required').not().isEmpty() /* 拥有的技能 */
     ]
   ],
-  (req, res) => {
+  async (req, res) => {
     //验证参数
     const errors = validationResult(req);
     //如果参数有错误
@@ -115,7 +117,14 @@ router.post(
         }, {
           new: true
         });
+        //返回简历对象
+        return res.json(profile);
       }
+      //如果不存在则创建新的简历
+      profile = new Profile(profileFields);
+      await profile.save();
+      //返回
+      res.json(profile);
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Server Error');
@@ -123,5 +132,224 @@ router.post(
   }
 
 );
+
+//获取所有简历
+//@route    Get api/profile
+//@desc     Get all profiles
+//@access   Public
+router.get('/', async (req, res) => {
+  try {
+    //查找简历集合，并包含用户集合的名字和头像
+    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    //返回简历
+    res.json(profiles);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+//根据用户id获取简历
+//@route    Get api/profile/user/:user_id
+//@desc     Get profile by user_id
+//@access   Public
+router.get('/user/:user_id', async (req, res) => {
+  try {
+    //根据用户Id查找简历，并包含用户集合的名字和头像
+    const profile = await Profile.findOne({
+      //路径上user_id参数
+      user: req.params.user_id
+    }).populate('user', ['name', 'avatar']);
+    //如果简历为空
+    if (!profile) {
+      return res.status(400).json({
+        msg: 'Profile not found'
+      });
+    }
+
+    //返回简历
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    //如果id参数不正确
+    if (error.kind == 'ObjectId') {
+      return res.status(400).json({
+        msg: 'Profile not found'
+      });
+    }
+    //其他错误
+    res.status(500).send('Server Error');
+  }
+});
+
+
+//根据用户id获取简历
+//@route    Delete api/profile
+//@desc     Delete profile ,user & posts
+//@access   Private
+router.delete('/', auth, async (req, res) => {
+  try {
+    //TODO
+
+    //根据用户Id删除用户的简历纪录
+    await Profile.findOneAndRemove({
+      user: req.user.id
+    });
+    //根据用户Id删除用户
+    await User.findOneAndRemove({
+      _id: req.user.id
+    });
+    res.json({
+      msg: 'User deleted'
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//添加工作经验
+//@route    Put api/profile/experience
+//@desc     Add profile experience
+//@access   Private
+router.put("/experience", [auth, [
+  //验证
+  check('title', 'Title is require').not().isEmpty(), //标题
+  check('company', 'Company is require').not().isEmpty(), //公司
+  check('form', 'From data is require').not().isEmpty() //开始工作日期
+]], async (req, res) => {
+  //获取验证错误
+  const errors = validationResult(req);
+  if (!errors) {
+    //返回验证错误
+    return res.status(400).json({
+      errors: errors.array()
+    });
+  }
+  //获取请求的参数并成为工作经验对象
+  const newExp = {
+    title,
+    company,
+    location,
+    from,
+    to,
+    current,
+    description
+  } = req.body;
+
+  try {
+    //从数据库中找到简历
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+    //填充工作经验
+    profile.experience.unshift(newExp);
+    //保存
+    await profile.save();
+    //返回
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//删除工作经验
+//@route    Put api/profile/experience
+//@desc     Delete experience from profile
+//@access   Private
+router.delete('/experience/:exp_id', auth, async (req, res) => {
+  try {
+    //从数据库中找到简历
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+    //获取要删除的工作经历的下标
+    const removeIndex = profile.experience.map(item => item.id).indexOf(req.params.exp_id);
+    //移除工作经历对象
+    profile.experience.splice(removeIndex, 1);
+    //保存简历
+    await profile.save();
+    //返回
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+//添加教育经历
+//@route    Put api/profile/education
+//@desc     Add profile education
+//@access   Private
+router.put("/education", [auth, [
+  //验证
+  check('school', 'School is require').not().isEmpty(), //学校
+  check('degree', 'Degree is require').not().isEmpty(), //学历
+  check('fieldofstudy', 'Field of study is require').not().isEmpty(), //专业
+  check('form', 'From data is require').not().isEmpty() //开始学习日期
+]], async (req, res) => {
+  //获取验证错误
+  const errors = validationResult(req);
+  if (!errors) {
+    //返回验证错误
+    return res.status(400).json({
+      errors: errors.array()
+    });
+  }
+  //获取请求的参数并成为教育经验对象
+  const newEdu = {
+    school,
+    degree,
+    fieldofstudy,
+    from,
+    to,
+    current,
+    description
+  } = req.body;
+
+  try {
+    //从数据库中找到简历
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+    //填充工作经验
+    profile.education.unshift(newEdu);
+    //保存
+    await profile.save();
+    //返回
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//删除教育经验
+//@route    Put api/profile/education
+//@desc     Delete education from profile
+//@access   Private
+router.delete('/education/:edu_id', auth, async (req, res) => {
+  try {
+    //从数据库中找到简历
+    const profile = await Profile.findOne({
+      user: req.user.id
+    });
+    //获取要删除的工作经历的下标
+    const removeIndex = profile.education.map(item => item.id).indexOf(req.params.edu_id);
+    //移除工作经历对象
+    profile.education.splice(removeIndex, 1);
+    //保存简历
+    await profile.save();
+    //返回
+    res.json(profile);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 module.exports = router;
