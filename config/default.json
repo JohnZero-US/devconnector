@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb://johnzero:johnzero@devconnector-shard-00-00-ixffn.mongodb.net:27017,devconnector-shard-00-01-ixffn.mongodb.net:27017,devconnector-shard-00-02-ixffn.mongodb.net:27017/test?ssl=true&replicaSet=DevConnector-shard-0&authSource=admin&retryWrites=true",
-  "jwtSecret": "bblong123"
+  "jwtSecret": "bblong123",
+  "githubClientId": "9d08ed556eeac2dfc246",
+  "githubSecret": "d9f63f31f959b5109f0ea98b89b5388b7c35ec60"
 }
