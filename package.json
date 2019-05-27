@@ -13,17 +13,17 @@
   "author": "John Zero",
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "latest",
-    "nodemon": "latest"
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.1"
   },
   "dependencies": {
-    "bcryptjs": "latest",
-    "config": "latest",
-    "express": "latest",
-    "express-validator": "latest",
-    "gravatar": "latest",
-    "jsonwebtoken": "latest",
-    "mongoose": "latest",
-    "request": "latest"
+    "bcryptjs": "^2.4.3",
+    "config": "^3.1.0",
+    "express": "^4.17.1",
+    "express-validator": "^5.3.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.11",
+    "request": "^2.88.0"
   }
 }
