@@ -4,10 +4,13 @@ Time:15点33分
 Auth:John Zero
 */
 import React, { Fragment, useState } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { setAlert } from "../actions/alert";
+import PropTypes from "prop-types";
 
-const Register = () => {
+//
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -25,31 +28,11 @@ const Register = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      //如果两次密码不相同
-      console.log("Passwords do not match");
+      //如果两次密码不相同,调用提示
+      setAlert("Passwords do not match", "danger");
     } else {
-      //请求配置
-      const config = {
-        header: {
-          "Content-Type": "application/json"
-        }
-      };
-      //新建一个用户对象
-      const newUser = {
-        name,
-        email,
-        password
-      };
       //
-      try {
-        //发送post请求，并接收响应对象
-        const res = await axios.post("/api/users", newUser, config);
-        //打印响应数据
-        console.log(res.data);
-      } catch (error) {
-        //打印错误信息
-        console.error(error.response.data);
-      }
+      console.log("SUCCESS");
     }
   };
 
@@ -115,4 +98,13 @@ const Register = () => {
   );
 };
 
-export default Register;
+//设置属性类型
+Register.prototype = {
+  setAlert: PropTypes.func.isRequired
+};
+
+//导出对象
+export default connect(
+  null,
+  { setAlert }
+)(Register);
