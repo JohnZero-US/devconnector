@@ -6,11 +6,12 @@ Auth:John Zero
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { setAlert } from "../actions/alert";
+import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-//
-const Register = ({ setAlert }) => {
+//注册函数
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,8 +32,8 @@ const Register = ({ setAlert }) => {
       //如果两次密码不相同,调用提示
       setAlert("Passwords do not match", "danger");
     } else {
-      //
-      console.log("SUCCESS");
+      //调用注册函数
+      register({ name, email, password });
     }
   };
 
@@ -50,7 +51,7 @@ const Register = ({ setAlert }) => {
             name="name"
             value={name}
             onChange={e => onChange(e)}
-            required
+            /* required */
           />
         </div>
         <div className="form-group">
@@ -60,7 +61,7 @@ const Register = ({ setAlert }) => {
             name="email"
             value={email}
             onChange={e => onChange(e)}
-            required
+            /* required */
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
@@ -72,10 +73,10 @@ const Register = ({ setAlert }) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
+           /*  minLength="6" */
             value={password}
             onChange={e => onChange(e)}
-            required
+            /* required */
           />
         </div>
         <div className="form-group">
@@ -83,10 +84,10 @@ const Register = ({ setAlert }) => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
+            /* minLength="6" */
             value={password2}
             onChange={e => onChange(e)}
-            required
+           /*  required */
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />
@@ -100,11 +101,12 @@ const Register = ({ setAlert }) => {
 
 //设置属性类型
 Register.prototype = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 };
 
 //导出对象
 export default connect(
   null,
-  { setAlert }
+  { setAlert, register }
 )(Register);
