@@ -1,5 +1,5 @@
 //引用枚举
-import { SET_ALERT, REMOVE_ALERT } from "../components/actions/types";
+import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
 
 //初始状态
 const initialState = [];
