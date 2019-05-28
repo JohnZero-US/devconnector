@@ -11,3 +11,9 @@ export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 
 //注册失败
 export const REGISTER_FAIL = "REGISTER_FAIL";
+
+//用户已加载
+export const USER_LOADED = "USER_LOADED";
+
+//授权失败
+export const AUTH_ERROR = "AUTH_ERROR";
