@@ -1,14 +1,19 @@
 //
 
 //
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createProfile } from "../../actions/profile";
+import { createProfile, getCurrentProfile } from "../../actions/profile";
 
 //创建简历
-const CreateProfile = ({ createProfile, history }) => {
+const EditProfile = ({
+  profile: { profile, loading },
+  createProfile,
+  getCurrentProfile,
+  history
+}) => {
   //简历表单
   const [formData, setFormData] = useState({
     company: "",
@@ -26,7 +31,27 @@ const CreateProfile = ({ createProfile, history }) => {
   });
   //是否显示社交链接输入框，和触发社交链接输入框
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
+  //根据loading和getCurrentProfile值变化而执行
+  useEffect(() => {
+    //获取当前简历
+    getCurrentProfile();
+    //根据当前简历数据填充值
+    setFormData({
+      company: loading || !profile.company ? "" : profile.company,
+      website: loading || !profile.website ? "" : profile.website,
+      location: loading || !profile.location ? "" : profile.location,
+      status: loading || !profile.status ? "" : profile.status,
+      skills: loading || !profile.skills ? "" : profile.skills.join(","),
+      githubusername:
+        loading || !profile.githubusername ? "" : profile.githubusername,
+      bio: loading || !profile.bio ? "" : profile.bio,
+      twitter: loading || !profile.social ? "" : profile.social.twitter,
+      facebook: loading || !profile.social ? "" : profile.social.facebook,
+      linkedin: loading || !profile.social ? "" : profile.social.linkedin,
+      youtube: loading || !profile.social ? "" : profile.social.youtube,
+      instagram: loading || !profile.social ? "" : profile.social.instagram
+    });
+  }, [loading, getCurrentProfile]);
   //重新结构化对象
   const {
     company,
@@ -42,6 +67,7 @@ const CreateProfile = ({ createProfile, history }) => {
     youtube,
     instagram
   } = formData;
+
   //输入或按钮改变
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -50,7 +76,7 @@ const CreateProfile = ({ createProfile, history }) => {
     //执行默认事件
     e.preventDefault();
     //创建简历
-    createProfile(formData, history);
+    createProfile(formData, history, true);
   };
   //
   return (
@@ -250,17 +276,19 @@ const CreateProfile = ({ createProfile, history }) => {
 };
 
 //指定要依赖注入的对象
-CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+EditProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 //设置映射对象
-/* const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-}); */
+const mapStateToProps = state => ({
+  profile: state.profile
+});
 
 //导出默认对象，并且连接（依赖注入）
 export default connect(
-  null,
-  { createProfile }
-)(withRouter(CreateProfile));
+  mapStateToProps,
+  { createProfile, getCurrentProfile }
+)(withRouter(EditProfile));

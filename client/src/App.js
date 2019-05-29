@@ -22,6 +22,8 @@ import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 //创建简历
 import CreateProfile from "./components/profile-forms/CreateProfile";
+//修改简历
+import EditProfile from "./components/profile-forms/EditProfile";
 
 //Redux
 import { Provider } from "react-redux";
@@ -72,6 +74,12 @@ const App = () => {
                 exact
                 path="/create-profile"
                 component={CreateProfile}
+              />
+              {/* 修改简历 */}
+              <PrivateRoute
+                exact
+                path="/edit-profile"
+                component={EditProfile}
               />
             </Switch>
           </section>
