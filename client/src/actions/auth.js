@@ -7,7 +7,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from "./types";
 import setAuthToken from "../util/setAuthToken";
 
@@ -109,4 +110,10 @@ export const login = (email, password) => async dispatch => {
       type: LOGIN_FAIL
     });
   }
+};
+
+//注销并清空用户信息
+export const logout = () => dispatch => {
+  //派发
+  dispatch({ type: LOGOUT });
 };

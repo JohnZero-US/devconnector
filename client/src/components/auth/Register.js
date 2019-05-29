@@ -5,7 +5,7 @@ Auth:John Zero
 */
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
@@ -120,5 +120,5 @@ const mapStateToProps = state => ({
 //导出默认对象，并且连接（依赖注入）
 export default connect(
   mapStateToProps,
-  { setAlert, register, isAuthenticated }
+  { setAlert, register }
 )(Register);

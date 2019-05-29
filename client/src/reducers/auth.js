@@ -5,7 +5,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from "../actions/types";
 
 //初始状态
@@ -55,6 +56,8 @@ export default function(state = initialState, action) {
     case AUTH_ERROR:
     //登录失败
     case LOGIN_FAIL:
+    //注销
+    case LOGOUT:
       //本地存储移除token
       localStorage.removeItem("token");
       //返回多个对象

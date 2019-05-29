@@ -23,3 +23,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
 //登录失败
 export const LOGIN_FAIL = "LOGIN_FAIL";
+
+//注销
+export const LOGOUT = "LOGOUT";
