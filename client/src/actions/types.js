@@ -26,3 +26,12 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 
 //注销
 export const LOGOUT = "LOGOUT";
+
+//获取简历
+export const GET_PROFILE = "GET_PROFILE";
+
+//清理简历信息
+export const CLEAR_PROFILE = "CLEAR_PROFILE";
+
+//获取简历错误
+export const PROFILE_ERROR = "PROFILE_ERROR";

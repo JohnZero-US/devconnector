@@ -4,9 +4,19 @@ Time:15点17分
 Auth:John Zero
 */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const Landing = () => {
+//导出
+const Landing = ({ isAuthenticated }) => {
+  //
+  if (isAuthenticated) {
+    //如果已经登录，跳转到仪表盘页面
+    return <Redirect to="/dashboard" />;
+  }
+
+  //
   return (
     <section className="landing">
       <div className="dark-overlay">
@@ -30,4 +40,15 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+//指定要依赖注入的对象
+Landing.propTypes = {
+  isAuthenticated: PropTypes.bool
+};
+
+//设置映射对象
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+//导出默认对象，并且连接（依赖注入）
+export default connect(mapStateToProps)(Landing);

@@ -6,8 +6,11 @@ Auth:John Zero
 import { combineReducers } from "redux";
 import alert from "./alert";
 import auth from "./auth";
+import profile from "./profile";
 
+//绑定所有的Redux委托
 export default combineReducers({
   alert,
-  auth
+  auth,
+  profile
 });

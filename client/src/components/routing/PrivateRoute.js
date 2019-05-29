@@ -28,7 +28,7 @@ const PrivateRoute = ({
 );
 
 //指定要依赖注入的对象
-PrivateRoute.prototype = {
+PrivateRoute.propTypes = {
   auth: PropTypes.object.isRequired
 };
 

@@ -11,13 +11,13 @@ import {
 
 //初始状态
 const initialState = {
-  //
+  //存储在本地的token
   token: localStorage.getItem("token"),
-  //
+  //是否已授权
   isAuthenticated: null,
-  //
+  //正在读取
   loading: true,
-  //
+  //用户对象
   user: null
 };
 

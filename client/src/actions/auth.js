@@ -8,7 +8,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
+  CLEAR_PROFILE
 } from "./types";
 import setAuthToken from "../util/setAuthToken";
 
@@ -114,6 +115,8 @@ export const login = (email, password) => async dispatch => {
 
 //注销并清空用户信息
 export const logout = () => dispatch => {
-  //派发
+  //派发清理简历信息
+  dispatch({ type: CLEAR_PROFILE });
+  //派发注销
   dispatch({ type: LOGOUT });
 };
