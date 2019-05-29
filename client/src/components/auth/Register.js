@@ -11,7 +11,7 @@ import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 
 //注册函数
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,6 +37,12 @@ const Register = ({ setAlert, register }) => {
     }
   };
 
+  //如果已授权
+  if (isAuthenticated) {
+    //重定向到注册后的页面
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
     <Fragment>
       <h1 className="large text-primary">Sign Up</h1>
@@ -51,7 +57,7 @@ const Register = ({ setAlert, register }) => {
             name="name"
             value={name}
             onChange={e => onChange(e)}
-            /* required */
+            required
           />
         </div>
         <div className="form-group">
@@ -61,7 +67,7 @@ const Register = ({ setAlert, register }) => {
             name="email"
             value={email}
             onChange={e => onChange(e)}
-            /* required */
+            required
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
@@ -73,10 +79,10 @@ const Register = ({ setAlert, register }) => {
             type="password"
             placeholder="Password"
             name="password"
-           /*  minLength="6" */
+            minLength="6"
             value={password}
             onChange={e => onChange(e)}
-            /* required */
+            required
           />
         </div>
         <div className="form-group">
@@ -84,10 +90,10 @@ const Register = ({ setAlert, register }) => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            /* minLength="6" */
+            minLength="6"
             value={password2}
             onChange={e => onChange(e)}
-           /*  required */
+            required
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />
@@ -99,14 +105,20 @@ const Register = ({ setAlert, register }) => {
   );
 };
 
-//设置属性类型
+//指定要依赖注入的对象
 Register.prototype = {
   setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
-//导出对象
+//设置映射对象
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+//导出默认对象，并且连接（依赖注入）
 export default connect(
-  null,
-  { setAlert, register }
+  mapStateToProps,
+  { setAlert, register, isAuthenticated }
 )(Register);

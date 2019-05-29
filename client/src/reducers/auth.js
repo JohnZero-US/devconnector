@@ -3,7 +3,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
-  AUTH_ERROR
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL
 } from "../actions/types";
 
 //初始状态
@@ -34,6 +36,8 @@ export default function(state = initialState, action) {
       };
     //注册成功
     case REGISTER_SUCCESS:
+    //登录成功
+    case LOGIN_SUCCESS:
       //本地存储token
       localStorage.setItem("token", payload.token);
       //返回多个对象
@@ -49,6 +53,8 @@ export default function(state = initialState, action) {
     case REGISTER_FAIL:
     //授权失败
     case AUTH_ERROR:
+    //登录失败
+    case LOGIN_FAIL:
       //本地存储移除token
       localStorage.removeItem("token");
       //返回多个对象
