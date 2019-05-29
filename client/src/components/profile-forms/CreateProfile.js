@@ -2,11 +2,13 @@
 
 //
 import React, { Fragment, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { createProfile } from "../../actions/profile";
 
 //创建简历
-const CreateProfile = props => {
+const CreateProfile = ({ createProfile, history }) => {
   //简历表单
   const [formData, setFormData] = useState({
     company: "",
@@ -43,6 +45,13 @@ const CreateProfile = props => {
   //输入或按钮改变
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  //提交
+  const onSubmit = e => {
+    //执行默认事件
+    e.preventDefault();
+    //创建简历
+    createProfile(formData, history);
+  };
   //
   return (
     <Fragment>
@@ -52,7 +61,7 @@ const CreateProfile = props => {
         profile stand out
       </p>
       <small>* = required field</small>
-      <form className="form">
+      <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           {/* 职业状态 */}
           <select name="status" value={status} onChange={e => onChange(e)}>
@@ -229,7 +238,7 @@ const CreateProfile = props => {
         )}
 
         {/* 提交表单 */}
-        <input type="submit" className="btn btn-primary my-1" />
+        <input type="submit" className="btn btn-primary my-1" value="Submit" />
 
         {/* 返回 */}
         <a className="btn btn-light my-1" href="dashboard.html">
@@ -240,6 +249,18 @@ const CreateProfile = props => {
   );
 };
 
-CreateProfile.propTypes = {};
+//指定要依赖注入的对象
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired
+};
 
-export default CreateProfile;
+//设置映射对象
+/* const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+}); */
+
+//导出默认对象，并且连接（依赖注入）
+export default connect(
+  null,
+  { createProfile }
+)(withRouter(CreateProfile));
