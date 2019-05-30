@@ -24,6 +24,10 @@ import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 //修改简历
 import EditProfile from "./components/profile-forms/EditProfile";
+//添加工作经验
+import AddExerience from "./components/profile-forms/AddExerience";
+//添加教育经历
+import AddEducation from "./components/profile-forms/AddEducation";
 
 //Redux
 import { Provider } from "react-redux";
@@ -80,6 +84,18 @@ const App = () => {
                 exact
                 path="/edit-profile"
                 component={EditProfile}
+              />
+              {/* 添加工作经验 */}
+              <PrivateRoute
+                exact
+                path="/add-experience"
+                component={AddExerience}
+              />
+              {/* 添加教育经历 */}
+              <PrivateRoute
+                exact
+                path="/add-education"
+                component={AddEducation}
               />
             </Switch>
           </section>

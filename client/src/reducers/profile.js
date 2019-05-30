@@ -1,4 +1,9 @@
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from "../actions/types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  CLEAR_PROFILE,
+  UPDATE_PROFILE
+} from "../actions/types";
 //
 
 //初始状态
@@ -24,6 +29,8 @@ export default function(state = initialState, action) {
   switch (type) {
     //获取简历成功
     case GET_PROFILE:
+    //更新简历成功
+    case UPDATE_PROFILE:
       //返回简历载体
       return { ...state, profile: payload, loading: false };
     //获取简历错误

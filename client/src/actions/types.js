@@ -30,6 +30,9 @@ export const LOGOUT = "LOGOUT";
 //获取简历
 export const GET_PROFILE = "GET_PROFILE";
 
+//更新简历
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
+
 //清理简历信息
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
 
