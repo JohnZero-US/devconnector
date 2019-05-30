@@ -30,6 +30,12 @@ export const LOGOUT = "LOGOUT";
 //获取简历
 export const GET_PROFILE = "GET_PROFILE";
 
+//获取所有简历
+export const GET_PROFILES = "GET_PROFILES";
+
+//获取Gibhub仓库
+export const GET_REPOS = "GET_REPOS";
+
 //更新简历
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 
