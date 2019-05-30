@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
+import ProfileTop from "./ProfileTop";
+import ProfileAbout from "./ProfileAbout";
 import { getProfileById } from "../../actions/profile";
 
 //简历详情页面
@@ -19,24 +21,34 @@ const Profile = ({
   useEffect(() => {
     //根据id获取简历
     getProfileById(match.params.id);
-  }, [getProfileById]);
+  }, [getProfileById, match.params.id]);
   //
   return (
     <Fragment>
       {profile === null || loading ? (
+        /* 加载中 */
         <Spinner />
       ) : (
         <Fragment>
+          {/* 后退按钮 */}
           <Link to="/profiles" className="btn btn-light">
             Back to profiles
           </Link>
           {auth.isAuthenticated &&
             auth.loading === false &&
             auth.user._id === profile.user._id && (
+              /* 如果为当前登录用户，则允许编辑 */
               <Link to="/edit-profile" className="btn btn-dark">
                 Edit Profile
               </Link>
             )}
+          {/*   */}
+          <div className="profile-grid my-1">
+            {/* 顶部 */}
+            <ProfileTop profile={profile} />
+            {/* 关于 */}
+            <ProfileAbout profile={profile} />
+          </div>
         </Fragment>
       )}
     </Fragment>
