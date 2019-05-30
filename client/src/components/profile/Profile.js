@@ -10,6 +10,7 @@ import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
 import { getProfileById } from "../../actions/profile";
 
 //简历详情页面
@@ -50,6 +51,7 @@ const Profile = ({
             <ProfileTop profile={profile} />
             {/* 关于 */}
             <ProfileAbout profile={profile} />
+            {/*  */}
             {/* 工作经验 */}
             <div className="profile-exp bg-white p-2">
               <h2 className="text-primary">Experience</h2>
@@ -68,9 +70,10 @@ const Profile = ({
                 <h4>No experience credential</h4>
               )}
             </div>
+            {/*  */}
             {/* 教育经历 */}
-            <div class="profile-edu bg-white p-2">
-              <h2 class="text-primary">Education</h2>
+            <div className="profile-edu bg-white p-2">
+              <h2 className="text-primary">Education</h2>
               {profile.education.length > 0 ? (
                 /* 如果学习经历集合大于0，遍历集合 */
                 <Fragment>
@@ -86,6 +89,11 @@ const Profile = ({
                 <h4>No education credential</h4>
               )}
             </div>
+            {/*  */}
+            {/* Github仓库 */}
+            {profile.githubusername && (
+              <ProfileGithub username={profile.githubusername} />
+            )}
           </div>
         </Fragment>
       )}

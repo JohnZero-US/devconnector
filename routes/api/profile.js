@@ -403,7 +403,7 @@ router.get("/github/:username", (req, res) => {
       //github uri路径
       uri:
         `https://api.github.com/users/${req.params.username}/repos?` +
-        `per_page=5&` + //获取页数
+        `per_page=50&` + //获取页数
         `sort=created:asc&` + //排序(创建日期顺序)
         `client_id=${config.get("githubClientId")}&` + //id
         `client_secret=${config.get("githubSecret")}`, //密钥
