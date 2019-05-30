@@ -38,3 +38,6 @@ export const CLEAR_PROFILE = "CLEAR_PROFILE";
 
 //获取简历错误
 export const PROFILE_ERROR = "PROFILE_ERROR";
+
+//删除账号
+export const ACCOUNT_DELETED = "ACCOUNT_DELETED";

@@ -5,9 +5,10 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { connect } from "react-redux";
+import { deleteExperience } from "../../actions/profile";
 
 //工作经验列表页面
-const Experience = ({ experience }) => {
+const Experience = ({ experience, deleteExperience }) => {
   //表格视图
   const experiences = experience.map(exp => (
     <tr key={exp.id}>
@@ -28,7 +29,12 @@ const Experience = ({ experience }) => {
       </td>
       <td>
         {/* 删除按钮 */}
-        <button className="btn btn-danger">Delete</button>
+        <button
+          onClick={() => deleteExperience(exp.id)}
+          className="btn btn-danger"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
@@ -54,7 +60,11 @@ const Experience = ({ experience }) => {
 
 /* 赋值默认属性 */
 Experience.propTypes = {
-  experience: PropTypes.array.isRequired
+  experience: PropTypes.array.isRequired,
+  deleteExperience: PropTypes.func.isRequired
 };
 
-export default connect()(Experience);
+export default connect(
+  null,
+  { deleteExperience }
+)(Experience);

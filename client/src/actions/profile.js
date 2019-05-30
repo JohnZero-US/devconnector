@@ -3,7 +3,13 @@ import axios from "axios";
 import { setAlert } from "./alert";
 
 //
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  UPDATE_PROFILE,
+  CLEAR_PROFILE,
+  ACCOUNT_DELETED
+} from "./types";
 
 //导出获取简历函数
 export const getCurrentProfile = () => async dispatch => {
@@ -137,5 +143,79 @@ export const addEducation = (formData, history) => async dispatch => {
       type: PROFILE_ERROR,
       payload: { msg: error.response.statusText, status: error.response.status }
     });
+  }
+};
+
+//删除工作经验
+export const deleteExperience = id => async dispatch => {
+  try {
+    //发送删除工作经验请求
+    const res = await axios.delete(`/api/profile/experience/${id}`);
+    //成功，派发简历数据
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+    //弹出提示信息
+    dispatch(setAlert("Experience Removed", "success"));
+  } catch (error) {
+    //发生错误时，派发错误信息
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+//删除教育经历
+export const deleteEducation = id => async dispatch => {
+  try {
+    //发送删除工作经验请求
+    const res = await axios.delete(`/api/profile/education/${id}`);
+    //成功，派发简历数据
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+    //弹出提示信息
+    dispatch(setAlert("Education Removed", "success"));
+  } catch (error) {
+    //发生错误时，派发错误信息
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+//删除账号和简历
+export const deleteAccount = id => async dispatch => {
+  //
+  if (window.confirm("Are you sure?This can NOT be undone!")) {
+    try {
+      //发送删除简历请求
+      const res = await axios.delete(`/api/profile`);
+      //成功，删除简历成功
+      dispatch({
+        type: CLEAR_PROFILE
+      });
+      //成功，删除账号成功
+      dispatch({
+        type: ACCOUNT_DELETED
+      });
+      //弹出提示信息
+      dispatch(
+        setAlert("Your account has been permanatly deleted!", "success")
+      );
+    } catch (error) {
+      //发生错误时，派发错误信息
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          msg: error.response.statusText,
+          status: error.response.status
+        }
+      });
+    }
   }
 };

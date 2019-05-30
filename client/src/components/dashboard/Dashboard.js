@@ -7,10 +7,11 @@ import Spinner from "../layout/Spinner";
 import DashboardActions from "./DashboardActions";
 import Experience from "./Experience";
 import Education from "./Education";
-import { getCurrentProfile } from "../../actions/profile";
+import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 
 const Dashboard = ({
   getCurrentProfile,
+  deleteAccount,
   auth: { user },
   profile: { profile, loading }
 }) => {
@@ -37,6 +38,12 @@ const Dashboard = ({
           <Experience experience={profile.experience} />
           {/* 教育经历列表 */}
           <Education education={profile.education} />
+          {/* 删除账号 */}
+          <div className="my-2">
+            <button className="btn btn-danger" onClick={() => deleteAccount()}>
+              <i className="fas fa-user-minus" /> Delete My Account
+            </button>
+          </div>
         </Fragment>
       ) : (
         /* 如果简历为空，提示创建简历 */
@@ -58,7 +65,9 @@ Dashboard.propTypes = {
   //授权信息
   auth: PropTypes.object.isRequired,
   //简历对象
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  //删除账号
+  deleteAccount: PropTypes.func.isRequired
 };
 
 //设置映射对象
@@ -72,7 +81,7 @@ const mapStateToProps = state => ({
 //导出默认对象，并且连接（依赖注入）
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);
 
 //

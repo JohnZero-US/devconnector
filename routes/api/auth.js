@@ -5,30 +5,27 @@
   DateTime: 2019/5/22 15:31
   Description: 
 */
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const User = require('../../models/User');
-const {
-  check,
-  validationResult
-} = require('express-validator/check');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const bcrypt = require('bcryptjs');
+const auth = require("../../middleware/auth");
+const User = require("../../models/User");
+const { check, validationResult } = require("express-validator/check");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const bcrypt = require("bcryptjs");
 
 //@route    GET api/auth
 //@desc     Test route
 //@access   Public
-router.get('/', auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     //到数据库验证是否存在此用户
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id).select("-password");
     //返回User对象
     res.json(user);
   } catch (e) {
     console.error(e.message);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 
@@ -36,10 +33,10 @@ router.get('/', auth, async (req, res) => {
 //@desc     Authenticate user & get token
 //@access   Public
 router.post(
-  '/',
+  "/",
   [
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Password is required').exists()
+    check("email", "Please include a valid email").isEmail(),
+    check("password", "Password is required").exists()
   ],
   async (req, res) => {
     //获取验证结果
@@ -51,11 +48,7 @@ router.post(
         errors: errors.array()
       });
     }
-    const {
-      name,
-      email,
-      password
-    } = req.body;
+    const { name, email, password } = req.body;
     //
     try {
       //从MongoDB中查找用户
@@ -65,13 +58,13 @@ router.post(
       //
       if (!user) {
         //如果用户不存在
-        return res
-          .status(400)
-          .json({
-            errors: [{
-              msg: 'Invalid Credentials'
-            }]
-          });
+        return res.status(400).json({
+          errors: [
+            {
+              msg: "Invalid Credentials"
+            }
+          ]
+        });
       }
 
       //加密后比对密码是否正确
@@ -79,13 +72,13 @@ router.post(
       //
       if (!isMatch) {
         //如果用户密码不匹配
-        return res
-          .status(400)
-          .json({
-            errors: [{
-              msg: 'Invalid Credentials'
-            }]
-          });
+        return res.status(400).json({
+          errors: [
+            {
+              msg: "Invalid Credentials"
+            }
+          ]
+        });
       }
       //
       const playload = {
@@ -97,7 +90,8 @@ router.post(
       //生成jwt 并且返回 jwt字符串
       jwt.sign(
         playload,
-        config.get('jwtSecret'), {
+        config.get("jwtSecret"),
+        {
           expiresIn: 36000
         },
         (err, token) => {
@@ -109,7 +103,7 @@ router.post(
       );
     } catch (e) {
       console.error(e.message);
-      res.status(500).send('Server error!');
+      res.status(500).send("Server error!");
     }
   }
 );
