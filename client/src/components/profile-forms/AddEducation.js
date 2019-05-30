@@ -134,7 +134,7 @@ const AddEducation = ({ addEducation, history }) => {
           />
         </div>
         <input type="submit" value="Submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="dashboard.html">
+        <Link className="btn btn-light my-1" to="/dashboard">
           Go Back
         </Link>
       </form>

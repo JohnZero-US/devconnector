@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import DashboardActions from "./DashboardActions";
+import Experience from "./Experience";
+import Education from "./Education";
 import { getCurrentProfile } from "../../actions/profile";
 
 const Dashboard = ({
@@ -29,7 +31,12 @@ const Dashboard = ({
       {profile !== null ? (
         /* 如果简历不为空 */
         <Fragment>
+          {/* 仪表盘按钮 */}
           <DashboardActions />
+          {/* 工作经验列表 */}
+          <Experience experience={profile.experience} />
+          {/* 教育经历列表 */}
+          <Education education={profile.education} />
         </Fragment>
       ) : (
         /* 如果简历为空，提示创建简历 */
