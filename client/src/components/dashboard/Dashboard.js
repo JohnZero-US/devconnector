@@ -19,7 +19,7 @@ const Dashboard = ({
   useEffect(() => {
     //执行获取当前简历
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   return loading && profile === null ? (
     <Spinner />

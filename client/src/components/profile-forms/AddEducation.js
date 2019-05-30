@@ -102,7 +102,6 @@ const AddEducation = ({ addEducation, history }) => {
               name="current"
               value=""
               checked={current}
-              value={current}
               onChange={e => {
                 setFormData({ ...formData, current: !current });
                 toggleDisabled(!toDateDisabled);

@@ -259,7 +259,7 @@ export const deleteAccount = id => async dispatch => {
   if (window.confirm("Are you sure?This can NOT be undone!")) {
     try {
       //发送删除简历请求
-      const res = await axios.delete(`/api/profile`);
+      await axios.delete(`/api/profile`);
       //成功，删除简历成功
       dispatch({
         type: CLEAR_PROFILE

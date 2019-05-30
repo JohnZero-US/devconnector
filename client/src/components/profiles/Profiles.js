@@ -13,7 +13,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     //获取简历列表
     getProfiles();
-  }, []);
+  }, [getProfiles]);
   //
   return (
     <Fragment>

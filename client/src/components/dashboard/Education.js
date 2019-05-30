@@ -11,7 +11,7 @@ import { deleteEducation } from "../../actions/profile";
 const Education = ({ education, deleteEducation }) => {
   //表格视图
   const educations = education.map(edu => (
-    <tr key={edu.id}>
+    <tr key={edu._id}>
       {/* 学校 */}
       <td>{edu.school}</td>
       {/* 学历 */}

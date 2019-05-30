@@ -11,7 +11,7 @@ import { deleteExperience } from "../../actions/profile";
 const Experience = ({ experience, deleteExperience }) => {
   //表格视图
   const experiences = experience.map(exp => (
-    <tr key={exp.id}>
+    <tr key={exp._id}>
       {/* 公司 */}
       <td>{exp.company}</td>
       {/* 标题 */}
