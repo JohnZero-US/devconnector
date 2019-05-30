@@ -10,24 +10,26 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 //注册html组件
 //导航栏
 import Navbar from "./components/layout/Navbar";
-//主页
+//主页面
 import Landing from "./components/layout/Landing";
-//注册
+//注册页面
 import Register from "./components/auth/Register";
-//登录
+//登录页面
 import Login from "./components/auth/Login";
-//提示
+//提示框
 import Alert from "./components/layout/Alert";
-//仪表盘
+//仪表盘页面
 import Dashboard from "./components/dashboard/Dashboard";
-//创建简历
+//创建简历页面
 import CreateProfile from "./components/profile-forms/CreateProfile";
-//修改简历
+//修改简历页面
 import EditProfile from "./components/profile-forms/EditProfile";
-//添加工作经验
+//添加工作经验页面
 import AddExerience from "./components/profile-forms/AddExerience";
-//添加教育经历
+//添加教育经历页面
 import AddEducation from "./components/profile-forms/AddEducation";
+//简历列表页面
+import Profiles from "./components/profiles/Profiles";
 
 //Redux
 import { Provider } from "react-redux";
@@ -71,6 +73,8 @@ const App = () => {
               <Route exact path="/register" component={Register} />
               {/* 登录 */}
               <Route exact path="/login" component={Login} />
+              {/* 简历列表 */}
+              <Route exact path="/profiles" component={Profiles} />
               {/* 仪表盘 */}
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               {/* 创建简历 */}
