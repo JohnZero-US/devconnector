@@ -30,6 +30,8 @@ import AddExerience from "./components/profile-forms/AddExerience";
 import AddEducation from "./components/profile-forms/AddEducation";
 //简历列表页面
 import Profiles from "./components/profiles/Profiles";
+//简历详细资料页面
+import Profile from "./components/profile/Profile";
 
 //Redux
 import { Provider } from "react-redux";
@@ -75,6 +77,8 @@ const App = () => {
               <Route exact path="/login" component={Login} />
               {/* 简历列表 */}
               <Route exact path="/profiles" component={Profiles} />
+              {/* 简历详情 */}
+              <Route exact path="/profile/:id" component={Profile} />
               {/* 仪表盘 */}
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               {/* 创建简历 */}

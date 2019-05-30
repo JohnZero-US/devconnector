@@ -8,6 +8,7 @@ import Spinner from "../layout/Spinner";
 import ProfileItem from "./ProfileItem";
 import { getProfiles } from "../../actions/profile";
 
+//简历列表页
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   //只执行一次
   useEffect(() => {

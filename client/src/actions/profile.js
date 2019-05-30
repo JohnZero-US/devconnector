@@ -61,7 +61,7 @@ export const getProfiles = () => async dispatch => {
 export const getProfileById = userId => async dispatch => {
   try {
     //请求获取简历
-    const res = await axios.get(`/api/profile/${userId}`);
+    const res = await axios.get(`/api/profile/user/${userId}`);
     //成功，派发简历数据
     dispatch({
       type: GET_PROFILE,
