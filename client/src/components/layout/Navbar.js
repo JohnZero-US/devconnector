@@ -9,20 +9,27 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
-//导出导航栏函数
+//导航栏页面
 const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
-  //
+  //已登录
   const authLinks = (
     <ul>
+      {/* 简历列表 */}
       <li>
         <Link to="/profiles">Developers</Link>
       </li>
+      {/* 贴文列表 */}
+      <li>
+        <Link to="/posts">Posts</Link>
+      </li>
+      {/* 仪表盘 */}
       <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />{" "}
           <span className="hide-sm">Dashboard</span>
         </Link>
       </li>
+      {/* 登出 */}
       <li>
         <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt" />{" "}
@@ -32,14 +39,18 @@ const Navbar = ({ logout, auth: { isAuthenticated, loading } }) => {
     </ul>
   );
 
+  //未登录
   const guestLinks = (
     <ul>
+      {/* 简历列表 */}
       <li>
         <Link to="/profiles">Developers</Link>
       </li>
+      {/* 注册 */}
       <li>
         <Link to="register">Register</Link>
       </li>
+      {/* 登录 */}
       <li>
         <Link to="login">Login</Link>
       </li>

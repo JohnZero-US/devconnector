@@ -32,6 +32,8 @@ import AddEducation from "./components/profile-forms/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 //简历详细资料页面
 import Profile from "./components/profile/Profile";
+//贴文列表页面
+import Posts from "./components/posts/Posts";
 
 //Redux
 import { Provider } from "react-redux";
@@ -104,6 +106,12 @@ const App = () => {
                 exact
                 path="/add-education"
                 component={AddEducation}
+              />
+              {/* 贴文列表 */}
+              <PrivateRoute
+                exact
+                path="/posts"
+                component={Posts}
               />
             </Switch>
           </section>

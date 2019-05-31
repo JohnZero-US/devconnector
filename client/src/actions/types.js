@@ -47,3 +47,9 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 
 //删除账号
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
+
+//获取所有贴文
+export const GET_POSTS = "GET_POSTS";
+
+//贴文错误
+export const POST_ERROR = "POST_ERROR";
