@@ -56,3 +56,6 @@ export const POST_ERROR = "POST_ERROR";
 
 //更新Likes
 export const UPDATE_LIKES = "UPDATE_LIKES";
+
+//删除贴文
+export const DELETE_POST = "DELETE_POST";

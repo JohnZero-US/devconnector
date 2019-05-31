@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { connect } from "react-redux";
-import { addLike, removeLike } from "../../actions/post";
+import { addLike, removeLike, deletePost } from "../../actions/post";
 
 //贴文详细页面
 const PostItem = ({
   addLike,
   removeLike,
+  deletePost,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date }
 }) => {
@@ -60,7 +61,11 @@ const PostItem = ({
         {/* 删除 */}
         {!auth.loading && user === auth.user._id && (
           //如果贴文为本人，提供删除按钮
-          <button type="button" className="btn btn-danger">
+          <button
+            onClick={e => deletePost(_id)}
+            type="button"
+            className="btn btn-danger"
+          >
             <i className="fas fa-times" />
           </button>
         )}
@@ -71,7 +76,11 @@ const PostItem = ({
 
 //属性类型
 PostItem.propTypes = {
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  removeLike: PropTypes.func.isRequired,
+  deletePost: PropTypes.func.isRequired
 };
 
 //映射状态到属性
@@ -82,5 +91,5 @@ const mapStateToProps = state => ({
 //依赖注入
 export default connect(
   mapStateToProps,
-  { addLike, removeLike }
+  { addLike, removeLike, deletePost }
 )(PostItem);

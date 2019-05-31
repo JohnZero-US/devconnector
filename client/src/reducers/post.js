@@ -1,5 +1,10 @@
 //
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES } from "../actions/types";
+import {
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+  DELETE_POST
+} from "../actions/types";
 
 //初始状态
 const initialState = {
@@ -21,6 +26,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: payload,
+        loading: false
+      };
+    //删除帖子
+    case DELETE_POST:
+      //
+      return {
+        ...state,
+        //根据post集合中的id对比移除了的帖子的id，不相同即保留
+        posts: state.posts.filter(post => post._id !== payload),
         loading: false
       };
     //贴文错误
