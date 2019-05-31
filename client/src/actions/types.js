@@ -65,3 +65,9 @@ export const ADD_POST = "ADD_POST";
 
 //获取单个贴文
 export const GET_POST = "GET_POST";
+
+//添加评论
+export const ADD_COMMENT = "ADD_COMMENT";
+
+//删除评论
+export const REMOVE_COMMENT = "REMOVE_COMMENT";

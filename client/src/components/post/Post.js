@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getPost } from "../../actions/post";
 import { Link } from "react-router-dom";
+import CommentForm from "./CommentForm";
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
   //使用效果
@@ -19,9 +20,11 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
     <Spinner />
   ) : (
     <Fragment>
+      {/* 返回贴文列表 */}
       <Link to="/posts" className="btn">
         Back To Posts
       </Link>
+      {/* 贴文 */}
       <div className="post bg-white p-1 my-1">
         <div>
           <Link to={`/profile/${post.user}`}>
@@ -34,21 +37,8 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         </div>
       </div>
 
-      <div className="post-form">
-        <div className="bg-primary p">
-          <h3>Leave A Comment</h3>
-        </div>
-        <form className="form my-1">
-          <textarea
-            name="text"
-            cols="30"
-            rows="5"
-            placeholder="Comment on this post"
-            required
-          />
-          <input type="submit" className="btn btn-dark my-1" value="Submit" />
-        </form>
-      </div>
+      {/* 评论输入框 */}
+      <CommentForm postId={post._id} />
 
       <div className="comments">
         <div className="post bg-white p-1 my-1">

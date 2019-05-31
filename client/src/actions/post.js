@@ -9,7 +9,9 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  GET_POST
+  GET_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from "./types";
 
 //获取所有帖文
@@ -128,6 +130,60 @@ export const getPost = id => async dispatch => {
       type: GET_POST,
       payload: res.data
     });
+  } catch (error) {
+    //发生错误时，派发错误信息
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+//添加评论
+export const addComment = (postId, formData) => async dispatch => {
+  //
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  //
+  try {
+    //发送请求，添加评论
+    const res = await axios.post(
+      `/api/posts/comment/${postId}`,
+      formData,
+      config
+    );
+    //成功，派发
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+    //弹出提示
+    dispatch(setAlert("Comment Created", "success"));
+  } catch (error) {
+    //发生错误时，派发错误信息
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+//删除评论
+export const deleteComment = (postId, commentId) => async dispatch => {
+  //
+  try {
+    //发送请求，删除评论
+    const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+    //成功，派发
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: commentId
+    });
+    //弹出提示
+    dispatch(setAlert("Comment Removed", "success"));
   } catch (error) {
     //发生错误时，派发错误信息
     dispatch({

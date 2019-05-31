@@ -5,7 +5,9 @@ import {
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  GET_POST
+  GET_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from "../actions/types";
 
 //初始状态
@@ -70,6 +72,27 @@ export default function(state = initialState, action) {
           //遍历贴文集合，如果对应id，则对like集合进行更改
           post._id === payload.id ? { ...post, likes: payload.likes } : post
         ),
+        loading: false
+      };
+    //添加评论
+    case ADD_COMMENT:
+      //
+      return {
+        ...state,
+        post: { ...state.post, comments: payload },
+        loading: false
+      };
+    //移除评论
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          //根据post集合中的id对比移除了的帖子的id，不相同即保留
+          comments: state.post.comments.filter(
+            comment => comment._id !== payload
+          )
+        },
         loading: false
       };
     //默认
