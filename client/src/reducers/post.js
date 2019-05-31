@@ -4,7 +4,8 @@ import {
   POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
-  ADD_POST
+  ADD_POST,
+  GET_POST
 } from "../actions/types";
 
 //初始状态
@@ -27,6 +28,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: payload,
+        loading: false
+      };
+    //获取单个贴文
+    case GET_POST:
+      //返回
+      return {
+        ...state,
+        post: payload,
         loading: false
       };
     //添加贴文

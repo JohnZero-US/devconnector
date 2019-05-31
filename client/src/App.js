@@ -34,6 +34,8 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 //贴文列表页面
 import Posts from "./components/posts/Posts";
+//贴文详情页面
+import Post from "./components/post/Post";
 
 //Redux
 import { Provider } from "react-redux";
@@ -108,11 +110,9 @@ const App = () => {
                 component={AddEducation}
               />
               {/* 贴文列表 */}
-              <PrivateRoute
-                exact
-                path="/posts"
-                component={Posts}
-              />
+              <PrivateRoute exact path="/posts" component={Posts} />
+              {/* 贴文详情 */}
+              <PrivateRoute exact path="/post/:id" component={Post} />
             </Switch>
           </section>
         </Fragment>

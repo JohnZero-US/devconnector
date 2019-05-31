@@ -62,3 +62,6 @@ export const DELETE_POST = "DELETE_POST";
 
 //添加贴文
 export const ADD_POST = "ADD_POST";
+
+//获取单个贴文
+export const GET_POST = "GET_POST";

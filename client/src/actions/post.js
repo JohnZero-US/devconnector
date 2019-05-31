@@ -8,7 +8,8 @@ import {
   POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
-  ADD_POST
+  ADD_POST,
+  GET_POST
 } from "./types";
 
 //获取所有帖文
@@ -108,6 +109,25 @@ export const addPost = formData => async dispatch => {
     });
     //弹出提示
     dispatch(setAlert("Post Created", "success"));
+  } catch (error) {
+    //发生错误时，派发错误信息
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+  }
+};
+
+//获取单个贴文
+export const getPost = id => async dispatch => {
+  try {
+    //发送请求，获取单个贴文
+    const res = await axios.get(`/api/posts/${id}`);
+    //成功，派发
+    dispatch({
+      type: GET_POST,
+      payload: res.data
+    });
   } catch (error) {
     //发生错误时，派发错误信息
     dispatch({
