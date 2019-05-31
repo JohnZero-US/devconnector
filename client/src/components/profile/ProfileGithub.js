@@ -12,7 +12,7 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
   useEffect(() => {
     //根据github的用户名获取github仓库信息
     getGithubRepos(username);
-  }, [getGithubRepos]);
+  }, [getGithubRepos,username]);
   return (
     <div className="profile-github">
       <h2 className="text-primary my-1">

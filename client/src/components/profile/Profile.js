@@ -24,7 +24,7 @@ const Profile = ({
   useEffect(() => {
     //根据id获取简历
     getProfileById(match.params.id);
-  }, [getProfileById]);
+  }, [getProfileById, match.params.id]);
   //
   return (
     <Fragment>

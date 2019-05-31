@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getPosts } from "../../actions/post";
 import PostItem from "./PostItem";
+import PostForm from "./PostForm";
 
 //贴文列表页面
 const Posts = ({ getPosts, post: { posts, loading } }) => {
@@ -25,21 +26,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
         <i className="fas fa-user" /> Welcome to the community!
       </p>
       {/* 贴文输入框 */}
-      <div className="post-form">
-        <div className="bg-primary p">
-          <h3>Say Something...</h3>
-        </div>
-        <form className="form my-1">
-          <textarea
-            name="text"
-            cols="30"
-            rows="5"
-            placeholder="Create a post"
-            required
-          />
-          <input type="submit" className="btn btn-dark my-1" value="Submit" />
-        </form>
-      </div>
+      <PostForm />
 
       {/* 贴文列表 */}
       <div className="posts">

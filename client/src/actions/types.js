@@ -59,3 +59,6 @@ export const UPDATE_LIKES = "UPDATE_LIKES";
 
 //删除贴文
 export const DELETE_POST = "DELETE_POST";
+
+//添加贴文
+export const ADD_POST = "ADD_POST";
