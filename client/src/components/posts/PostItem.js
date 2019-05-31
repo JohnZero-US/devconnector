@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
 import { connect } from "react-redux";
+import { addLike, removeLike } from "../../actions/post";
 
 //贴文详细页面
 const PostItem = ({
+  addLike,
+  removeLike,
   auth,
   post: { _id, text, name, avatar, user, likes, comments, date }
 }) => {
@@ -30,16 +33,24 @@ const PostItem = ({
         <p className="post-date">
           Posted on <Moment format="YYYY/MM/DD HH:mm:ss">{date}</Moment>
         </p>
-        {/* like数 */}
-        <button type="button" className="btn btn-light">
+        {/* 添加Like */}
+        <button
+          onClick={e => addLike(_id)}
+          type="button"
+          className="btn btn-light"
+        >
           <i className="fas fa-thumbs-up" />{" "}
           {likes.length > 0 && <span>{likes.length}</span>}
         </button>
         {/* unlike */}
-        <button type="button" className="btn btn-light">
+        <button
+          onClick={e => removeLike(_id)}
+          type="button"
+          className="btn btn-light"
+        >
           <i className="fas fa-thumbs-down" />
         </button>
-        {/* 评论数 */}
+        {/* 添加评论 */}
         <Link to={`/post/${_id}`} className="btn btn-primary">
           Discussion{" "}
           {comments.length > 0 && (
@@ -71,5 +82,5 @@ const mapStateToProps = state => ({
 //依赖注入
 export default connect(
   mapStateToProps,
-  {}
+  { addLike, removeLike }
 )(PostItem);
