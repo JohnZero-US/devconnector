@@ -60,6 +60,10 @@ export const getProfiles = () => async dispatch => {
 //根据用户id获取简历
 export const getProfileById = userId => async dispatch => {
   try {
+    //先清理简历缓存
+    dispatch({
+      type: CLEAR_PROFILE
+    });
     //请求获取简历
     const res = await axios.get(`/api/profile/user/${userId}`);
     //成功，派发简历数据

@@ -24,11 +24,11 @@ const Profile = ({
   useEffect(() => {
     //根据id获取简历
     getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]);
+  }, [getProfileById]);
   //
   return (
     <Fragment>
-      {profile === null || loading ? (
+      {loading || profile === null || profile.user._id !== match.params.id ? (
         /* 加载中 */
         <Spinner />
       ) : (

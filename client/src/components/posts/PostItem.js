@@ -9,13 +9,14 @@ import { connect } from "react-redux";
 
 //贴文详细页面
 const PostItem = ({
-  post: { _id, text, name, avatar, likes, comments, date }
+  auth,
+  post: { _id, text, name, avatar, user, likes, comments, date }
 }) => {
   return (
     <div className="post bg-white p-1 my-1">
       <div>
         {/* 简历 */}
-        <Link to="/profile">
+        <Link to={`/profile/${user}`}>
           {/* 头像 */}
           <img className="round-img" src={avatar} alt="" />
           {/* 用户名 */}
@@ -27,24 +28,31 @@ const PostItem = ({
         <p className="my-1">{text}</p>
         {/* 最后更新时间 */}
         <p className="post-date">
-          <Moment format="YYYY/MM/DD HH:mm:ss">{date}</Moment>
+          Posted on <Moment format="YYYY/MM/DD HH:mm:ss">{date}</Moment>
         </p>
         {/* like数 */}
         <button type="button" className="btn btn-light">
-          <i className="fas fa-thumbs-up" /> <span>{likes.length}</span>
+          <i className="fas fa-thumbs-up" />{" "}
+          {likes.length > 0 && <span>{likes.length}</span>}
         </button>
         {/* unlike */}
         <button type="button" className="btn btn-light">
           <i className="fas fa-thumbs-down" />
         </button>
         {/* 评论数 */}
-        <Link to="/post" className="btn btn-primary">
-          Discussion <span className="comment-count">{comments.length}</span>
+        <Link to={`/post/${_id}`} className="btn btn-primary">
+          Discussion{" "}
+          {comments.length > 0 && (
+            <span className="comment-count">{comments.length}</span>
+          )}
         </Link>
         {/* 删除 */}
-        <button type="button" className="btn btn-danger">
-          <i className="fas fa-times" />
-        </button>
+        {!auth.loading && user === auth.user._id && (
+          //如果贴文为本人，提供删除按钮
+          <button type="button" className="btn btn-danger">
+            <i className="fas fa-times" />
+          </button>
+        )}
       </div>
     </div>
   );

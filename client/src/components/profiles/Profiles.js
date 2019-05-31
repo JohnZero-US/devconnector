@@ -19,7 +19,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   return (
     <Fragment>
       {/* 是否加载中 */}
-      {loading ? (
+      {loading || profiles === null ? (
         /* 如果加载中就显示加载的gif */
         <Spinner />
       ) : (

@@ -16,7 +16,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     getPosts();
   }, [getPosts]);
   //返回视图
-  return loading ? (
+  return loading || posts === null ? (
     <Spinner />
   ) : (
     <Fragment>

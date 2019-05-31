@@ -18,7 +18,9 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
       <h2 className="text-primary my-1">
         <i className="fab fa-github" /> Github Repos
       </h2>
-      {repos !== null ? (
+      {repos === null ? (
+        <Spinner />
+      ) : (
         /* 如果Github仓库信息集合大于0，遍历集合 */
         <Fragment>
           {repos.map(repo => (
@@ -57,9 +59,6 @@ const ProfileGithub = ({ username, getGithubRepos, repos }) => {
             </div>
           ))}
         </Fragment>
-      ) : (
-        /* 加载中 */
-        <Spinner />
       )}
     </div>
   );
