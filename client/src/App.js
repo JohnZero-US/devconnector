@@ -4,38 +4,14 @@ Time:15点18分
 Auth:John Zero
 */
 import React, { Fragment, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-//私有路由
-import PrivateRoute from "./components/routing/PrivateRoute";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 //注册html组件
 //导航栏
 import Navbar from "./components/layout/Navbar";
 //主页面
 import Landing from "./components/layout/Landing";
-//注册页面
-import Register from "./components/auth/Register";
-//登录页面
-import Login from "./components/auth/Login";
-//提示框
-import Alert from "./components/layout/Alert";
-//仪表盘页面
-import Dashboard from "./components/dashboard/Dashboard";
-//创建简历页面
-import CreateProfile from "./components/profile-forms/CreateProfile";
-//修改简历页面
-import EditProfile from "./components/profile-forms/EditProfile";
-//添加工作经验页面
-import AddExerience from "./components/profile-forms/AddExerience";
-//添加教育经历页面
-import AddEducation from "./components/profile-forms/AddEducation";
-//简历列表页面
-import Profiles from "./components/profiles/Profiles";
-//简历详细资料页面
-import Profile from "./components/profile/Profile";
-//贴文列表页面
-import Posts from "./components/posts/Posts";
-//贴文详情页面
-import Post from "./components/post/Post";
+//主路由
+import Routes from "./components/routing/Routes";
 
 //Redux
 import { Provider } from "react-redux";
@@ -52,6 +28,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
+//每次刷新都会加载
 const App = () => {
   //
   useEffect(() => {
@@ -59,7 +36,7 @@ const App = () => {
     store.dispatch(loadUser());
   }, []);
 
-  //
+  //视图
   return (
     /* 加载store，加载redux */
     <Provider store={store}>
@@ -70,51 +47,8 @@ const App = () => {
           <Navbar />
           {/* 首页导航 */}
           <Route exact path="/" component={Landing} />
-          {/* 主页面 */}
-          <section className="container">
-            {/* 提示框 */}
-            <Alert />
-            <Switch>
-              {/* 注册 */}
-              <Route exact path="/register" component={Register} />
-              {/* 登录 */}
-              <Route exact path="/login" component={Login} />
-              {/* 简历列表 */}
-              <Route exact path="/profiles" component={Profiles} />
-              {/* 简历详情 */}
-              <Route exact path="/profile/:id" component={Profile} />
-              {/* 仪表盘 */}
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              {/* 创建简历 */}
-              <PrivateRoute
-                exact
-                path="/create-profile"
-                component={CreateProfile}
-              />
-              {/* 修改简历 */}
-              <PrivateRoute
-                exact
-                path="/edit-profile"
-                component={EditProfile}
-              />
-              {/* 添加工作经验 */}
-              <PrivateRoute
-                exact
-                path="/add-experience"
-                component={AddExerience}
-              />
-              {/* 添加教育经历 */}
-              <PrivateRoute
-                exact
-                path="/add-education"
-                component={AddEducation}
-              />
-              {/* 贴文列表 */}
-              <PrivateRoute exact path="/posts" component={Posts} />
-              {/* 贴文详情 */}
-              <PrivateRoute exact path="/post/:id" component={Post} />
-            </Switch>
-          </section>
+          {/*主路由*/}
+          <Route component={Routes} />
         </Fragment>
       </Router>
     </Provider>

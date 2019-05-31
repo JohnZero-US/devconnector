@@ -9,6 +9,7 @@ import Experience from "./Experience";
 import Education from "./Education";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 
+//仪表盘
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
